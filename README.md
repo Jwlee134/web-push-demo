@@ -1,4 +1,4 @@
-This is a demo for implementing service worker and web push.
+This is a demo application for implementing service worker and web push.
 
 ## Getting Started
 
@@ -19,7 +19,7 @@ You will get a JSON as follows:
 }
 ```
 
-Copy and paste both of keys to `src/lib/constants.ts`
+Copy and paste both of keys to each constants in `src/lib/constants.ts`
 
 <hr />
 
@@ -33,14 +33,16 @@ npm run dev
 
 **⚠️ Make sure to follow two steps below if you also want to test on your mobile devices.**
 
-1. Get https address:
+1. Get a https address:
 
 ```bash
 npm run lt
 ```
 
 2. Copy the address and go to `src/libs/constants.ts`. Replace `http://localhost:3000` with the copied address.
+
 <hr />
+
 You will see 2 buttons in the root page. Click `check` button to test if your browser supports service worker. After clicking this you will see a JSON message in terminal something like this:
 
 ```json
