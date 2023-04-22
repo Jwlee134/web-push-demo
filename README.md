@@ -1,38 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a demo for implementing service worker and web push.
 
 ## Getting Started
 
-First, run the development server:
+**⚠️ Skip this step if you have already generated keys.**
+
+Get your publicKey and privateKey:
+
+```bash
+npm run gen
+```
+
+You will get a JSON as follows:
+
+```json
+{
+  "publicKey": "BGtkbcjrO12YMoDuq2sCQeHlu47uPx3SHTgFKZFYiBW8Qr0D9vgyZSZPdw6_4ZFEI9Snk1VEAj2qTYI1I1YxBXE",
+  "privateKey": "I0_d0vnesxbBSUmlDdOKibGo6vEXRO-Vu88QlSlm5j0"
+}
+```
+
+Copy and paste both of keys to `src/lib/constants.ts`
+
+<hr />
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<hr />
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+**⚠️ Make sure to follow two steps below if you also want to test on your mobile devices.**
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+1. Get https address:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+npm run lt
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. Copy the address and go to `src/libs/constants.ts`. Replace `http://localhost:3000` with the copied address.
+<hr />
+You will see 2 buttons in the root page. Click `check` button to test if your browser supports service worker. After clicking this you will see a JSON message in terminal something like this:
 
-## Learn More
+```json
+{
+  "message": "This browser supports serviceWorker.",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
+  "isSecureContext": true
+}
+```
 
-To learn more about Next.js, take a look at the following resources:
+After making sure your browser supports it, click `subscribe` button. It will show you notification permission request pop up.
+When you allow the permission you will see that `src/lib.data.json` is updated with your browser's keys.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Trigger push notification:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+npm run push
+```
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+It will show you a notification with text "Hello, World!".
